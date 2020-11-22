@@ -24,9 +24,9 @@ def home():
 
 @app.route('/chat')
 def chat():
+    print("IS THIS BEING RUN")
     username = request.args.get('username')
     room = request.args.get('room')
-    incoming_sms = request.args.get("incoming_sms")
 
     if username and room:
         return render_template('chat.html', username=username, room=room)
