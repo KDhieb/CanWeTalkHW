@@ -10,7 +10,7 @@ from app.base.models import ACCESS
 
 ## login and registration
 
-CHOICES = [(ACCESS['admin'], 'Admin'),(ACCESS['staff'], 'Staff'),(ACCESS['student'], 'Student')]
+CHOICES = [(ACCESS['staff'], 'Staff'),(ACCESS['student'], 'Student')]
 
 class LoginForm(FlaskForm):
     username = StringField    ('Username', id='username_login'   , validators=[DataRequired()])

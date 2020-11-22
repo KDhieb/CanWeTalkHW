@@ -8,6 +8,7 @@ from os import environ
 from sys import exit
 from decouple import config
 
+from app.base.routes import socketio
 from config import config_dict
 from app import create_app, db
 
@@ -30,3 +31,6 @@ Migrate(app, db)
 
 if __name__ == "__main__":
     app.run()
+    socketio.run(app, debug=True)
+
+

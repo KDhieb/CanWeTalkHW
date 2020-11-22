@@ -1,0 +1,86 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Page Blank {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <!-- [ breadcrumb ] start -->
+            <div class="page-header">
+                
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">Student's Profile</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="javascript:">Profile</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ breadcrumb ] end -->
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <!-- [ Main Content ] start -->
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="card">
+                                <div class="card-block">
+                                    <img class="rounded-circle" style="width:70px;" src="/static/assets/images/user/avatar-2.jpg" alt="activity-user">
+                                    <h3 >Mathilde Andersen's Profile</h3>
+                                    <p class="text-dark mb-1"> Age: 20</p>
+                                    <p class="text-dark mb-1">Email: MathildeAndersen@email.com</p>
+                                    <p class="text-dark mb-1">Gender: Male</p>
+                                    <p class="text-dark mb-1">Student's Mental Health Concern: Bipolar</p>
+                                    <p class="text-dark mb-1">Counselor Evaluation: Diagnosed with Bipolar Disorder</p>
+                                    <p class="text-dark mb-1"> Mental condition: 
+                                    <p class="text-danger mb-1"> Unstable</p> 
+                                    <br> </br>
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <button href="mailto:webmaster@example.com" type="button" class="btn btn-success">Email <span class="badge badge-light"></span></button>
+                                            <button type="button" class="btn btn-secondary" title="" data-toggle="tooltip" data-original-title="btn btn-secondary">Edit</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="card">
+                                <div class="card-block">
+                                    <h5>Councellior Diagnosis</h5>
+                                    <mark> Bipolar</mark>
+                                    <br></br>
+                                    <h5>Councellior Notes</h5>
+                                    <p> "Student had anxious concerns around X,Y and Z. These thoughts and worries made Student anxious. It's to my understanding that Student has experienced symptoms of depression"</p>
+                                    <br></br>
+                                    <h5>Councellior's Remedy</h5>
+                                    <p> Recommeneded student to book Doctor's appoint, recommended breathing excerises, and gave student tips deal with depression</p>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">Add notes</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" title="" data-toggle="tooltip" data-original-title="btn btn-primary">Add Note</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

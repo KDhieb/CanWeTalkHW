@@ -15,7 +15,8 @@
             <div class="card">
                 <div class="card-body text-center">
                     <div class="mb-4">
-                        <i class="feather icon-unlock auth-icon"></i>
+                        <img src="https://img.icons8.com/cotton/64/000000/brain-3.png"/>
+                        <h3 class="mb-4">CanWeTalk</h3>
                     </div>
                     <h3 class="mb-4">Login</h3>
 
@@ -23,7 +24,7 @@
                         {% if msg %}
                             {{ msg | safe }}
                         {% else %}
-                            Default Credentials: test / pass
+
                         {% endif %} 
                     </span>
 
@@ -45,7 +46,7 @@
                         <div class="form-group text-left">
                             <div class="checkbox checkbox-fill d-inline">
                                 <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" checked="">
-                                <label for="checkbox-fill-a1" class="cr"> Save Details</label>
+                                <label for="checkbox-fill-a1" class="cr"> Remember me</label>
                             </div>
                         </div>
                         <button type="submit" name="login" class="btn btn-primary shadow-2 mb-4">Login</button>
@@ -53,12 +54,6 @@
                     </form>
 
                     <p class="mb-0 text-muted">Don’t have an account? <a href={{ url_for('base_blueprint.register') }} >Signup</a></p>
-                    <br />
-                    <p class="mb-2 text-muted">
-                        &copy; <a target="_blank" href="https://codedthemes.com/">CodedThemes</a> 
-                        - <a target="_blank" 
-                             href="https://appseed.us/admin-dashboards/flask-dashboard-dattaable">Flask Dashboard DattaAble</a>.
-                    </p>
                 </div>
             </div>
         </div>
