@@ -6,7 +6,7 @@
                     <div class="b-bg">
                         <img src="https://img.icons8.com/cotton/64/000000/brain--v1.png"/>
                     </div>
-                    <span class="b-title">CanWeTalk</span>
+                    <span class="b-title">&nbsp;CanWeTalk</span>
                 </a>
                 <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
             </div>
@@ -23,7 +23,7 @@
                 {% endif %}
 
                 {% if current_user.is_student() %}
-             <li class=""><a href="/ui-breadcrumb-pagination.html" class="nav-item pcoded-menu-caption">Student Profile</a></li>
+             <li class=""><a href="/indexstudent.html" class="nav-item pcoded-menu-caption">Student Profile</a></li>
                 {% endif %}
 
 
@@ -65,23 +65,26 @@
                             <span class="pcoded-micon"><i class="feather icon-map"></i></span><span class="pcoded-mtext">Maps</span></a></li>
                    {% endif %}
 
+                {%   if current_user.is_staff() %}
                 <li class="nav-item pcoded-menu-caption">
                         <label>Staff Options</label>
                     </li>
 
-                {%   if current_user.is_staff() %}
 
                     <li data-username="Sample Page" class="nav-item {% if 'page-blank' in segment %} active {% endif %}">
+                        <a href="/chat.html" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Chat</span></a></li>
+
+                    {% if current_user.is_admin() %}
+                     <li data-username="Search Student" class="nav-item {% if 'page-blank' in segment %} active {% endif %}">
                         <a href="/page-blank.html" class="nav-link">
                             <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Sample page</span></a></li>
 
-                     <li data-username="Search Student" class="nav-item {% if 'page-blank' in segment %} active {% endif %}">
-                        <a href="/studentPage.html" class="nav-link">
-                            <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Student Profile</span></a></li>
 
                     <li data-username="Search Student" class="nav-item {% if 'page-blank' in segment %} active {% endif %}">
                         <a href="/studentPage.html" class="nav-link">
                             <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Student Profile</span></a></li>
+                        {% endif %}
 
                     <li data-username="Search Student" class="nav-item {% if 'page-blank' in segment %} active {% endif %}">
                         <a href="/searchStudent.html" class="nav-link">
