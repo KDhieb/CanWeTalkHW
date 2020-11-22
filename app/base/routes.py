@@ -2,6 +2,14 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
+
+import socketio
+
+from flask import Flask, render_template, request, redirect, url_for
+from flask_socketio import SocketIO, join_room, leave_room, emit, send
+from twilio.twiml.messaging_response import MessagingResponse
+from twilio.rest import Client
+
 from flask import jsonify, render_template, redirect, request, url_for
 from flask_login import (
     current_user,
@@ -121,23 +129,23 @@ def shutdown():
 
 @login_manager.unauthorized_handler
 def unauthorized_handler():
-    return render_template('errors/403.html'), 403
+    return render_template('/page-403.html'), 403
 
 
 @blueprint.errorhandler(403)
 def access_forbidden(error):
-    return render_template('errors/403.html'), 403
+    return render_template('/page-403.html'), 403
 
 
 @blueprint.errorhandler(404)
 def not_found_error(error):
-    return render_template('page-404.html'), 404
+    return render_template('/page-404.html'), 404
 
 
 @blueprint.errorhandler(500)
 def internal_error(error):
-    return render_template('errors/500.html'), 500
-#
+    return render_template('/page-500.html'), 500
+
 
 @blueprint.route('/', methods=['POST'])
 def setStatusOnCall(user):
@@ -145,8 +153,95 @@ def setStatusOnCall(user):
     getUser.status = STATUS['onCall']
     db.session.commit()
 
+
 @blueprint.route('/', methods=['POST'])
 def setStatusOffCall(user):
     getUser = User.query.filter_by(id=user.id)
     getUser.status = STATUS['offCall']
     db.session.commit()
+
+
+# TWILIO INTEGRATION
+
+sio = socketio.Client()
+
+# Add Twilio authentication
+account_sid = "ACcf38ea43fc81a1e3ad61701d6ebc096d"
+auth_token = "19de24461133f84dad89be010d3b2554"
+client = Client(account_sid, auth_token)
+
+app = Flask(__name__)
+socketio = SocketIO(app)
+
+
+@blueprint.route('/chat-index')
+def home():
+    return render_template("chat-index.html")
+
+
+@blueprint.route('/chat')
+def chat():
+    print("IS THIS BEING CALLED!%!%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+    username = request.args.get('username')
+    room = request.args.get('room')
+
+    if username and room:
+        return render_template('chat.html', username=username, room=room)
+    else:
+        return redirect(url_for('base_blueprint.home'))
+
+
+@socketio.on('send_message')
+def handle_send_message_event(data):
+    app.logger.info("{} has sent message to the room {}: {}".format(data['username'],
+                                                                    data['room'],
+                                                                    data['message']))
+    socketio.emit('receive_message', data, room=data['room'])
+    print(data)
+    # Stores the room and message in a variable
+    outbound_number = data['room']
+    outbound_message = data['message']
+
+    # Sends the message back to the user via SMS
+    client.messages.create(
+        to=outbound_number,
+        from_="+16479058445",
+        body=outbound_message
+    )
+
+
+@socketio.on('join_room')
+def handle_join_room_event(data):
+    app.logger.info("{} has joined the room {}".format(data['username'], data['room']))
+    join_room(data['room'])
+    socketio.emit('join_room_announcement', data, room=data['room'])
+
+
+@socketio.on('leave_room')
+def handle_leave_room_event(data):
+    app.logger.info("{} has left the room {}".format(data['username'], data['room']))
+    leave_room(data['room'])
+    socketio.emit('leave_room_announcement', data, room=data['room'])
+
+
+# Routes for Twilio API
+@app.route("/inbound_sms", methods=['GET', 'POST'])
+def inbound_sms():
+    response = MessagingResponse()
+
+    # Grab information from incoming SMS message
+    inbound_message = request.form['Body']
+    from_number = request.form['From']
+    to_number = request.form['To']
+
+    # Store the above information in a data object to pass on
+    data = {'username': from_number, 'room': from_number, 'message': inbound_message}
+
+    # Emits a received message using the above data object to the room number
+    socketio.emit('receive_message', data, room=from_number)
+
+    return 'message sent'
+
+
+if __name__ == "__routes__":
+    socketio.run(app, debug=True)

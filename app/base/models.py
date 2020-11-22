@@ -2,7 +2,7 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
-
+from random import randint
 from flask_login import UserMixin
 from sqlalchemy import Binary, Column, Integer, String
 
@@ -32,6 +32,8 @@ class User(db.Model, UserMixin):
     password = Column(Binary)
     access = Column(Integer, default=ACCESS['student'])
     status = Column(Integer, default=STATUS['onCall'])
+    studentId = Column(Integer, unique=True, default=11111111)
+    notes= Column(String, default="")
 
     def __init__(self, **kwargs):
         for property, value in kwargs.items():
@@ -46,6 +48,8 @@ class User(db.Model, UserMixin):
                 value = hash_pass( value ) # we need bytes here (not plain str)
                 
             setattr(self, property, value)
+
+
 
     def __repr__(self):
         return str(self.username)
@@ -79,3 +83,5 @@ def request_loader(request):
     username = request.form.get('username')
     user = User.query.filter_by(username=username).first()
     return user if user else None
+
+
