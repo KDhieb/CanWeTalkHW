@@ -10,6 +10,18 @@ from app import db, login_manager
 
 from app.base.util import hash_pass
 
+
+ACCESS = {
+    'admin' : 0,
+    'staff' : 1,
+    'student' : 2
+}
+
+STATUS = {
+    'onCall'  : 1,
+    'offCall' : 0
+}
+
 class User(db.Model, UserMixin):
 
     __tablename__ = 'User'
@@ -18,6 +30,8 @@ class User(db.Model, UserMixin):
     username = Column(String, unique=True)
     email = Column(String, unique=True)
     password = Column(Binary)
+    access = Column(Integer, default=ACCESS['student'])
+    status = Column(Integer, default=STATUS['onCall'])
 
     def __init__(self, **kwargs):
         for property, value in kwargs.items():
@@ -36,6 +50,25 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return str(self.username)
 
+    def is_admin(self):
+        return self.access == ACCESS['admin']
+
+    def is_staff(self):
+        return self.access == ACCESS['staff']
+
+    def is_student(self):
+        return self.access == ACCESS['student']
+
+    def is_onCall(self):
+        return self.status == STATUS['onCall']
+
+    def set_status_onCall(self):
+        self.status = STATUS['onCall']
+        return self.status
+
+    def set_status_offCall(self):
+        self.status = STATUS['offCall']
+        return self.status
 
 @login_manager.user_loader
 def user_loader(id):
