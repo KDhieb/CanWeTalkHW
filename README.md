@@ -70,7 +70,7 @@ pip3 install -r requirements.txt
 # --port=5000    - specify the app port (default 5000)  
 flask run --host=0.0.0.0 --port=5000
 # Access the dashboard in browser: http://127.0.0.1:5000/
-```
+
 
 ## Inspiration
 University students during the COVID-19 pandemic have experienced some of the worst mental-health concerns in the population, as we’re separated from our friends, family and forced to study online during lockdown. We wanted to create the best platform for students to easily connect with mental-health help from university therapists or counselors. 
