@@ -1,6 +1,6 @@
 import os
 import socketio
-from flask import Flask, flash, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
 from flask_socketio import SocketIO, join_room, leave_room, emit, send
 from twilio.twiml.messaging_response import MessagingResponse
 from twilio.rest import Client
@@ -40,8 +40,6 @@ def handle_send_message_event(data):
                                                                     data['room'],
                                                                     data['message']))
     socketio.emit('receive_message', data, room=data['room'])
-    
-    flash("new message")
     
     # Stores the room and message in a variable
     outbound_number = data['room']
