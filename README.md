@@ -1,79 +1,43 @@
-# Get the code
+# HackWestern7 Hackathon Project - CanWeTalk Mental Health Platform
+
+# Inspiration
+University students during the COVID-19 pandemic have experienced some of the worst mental-health concerns in the population, as we’re separated from our friends, family and forced to study online during lockdown. We wanted to create the best platform for students to easily connect with mental-health help from university therapists or counselors. 
+
+## Get the code
 git clone https://github.com/app-generator/flask-dashboard-dattaable.git
 cd flask-dashboard-dattaable
-# Virtualenv modules installation (Unix based systems)
+## Virtualenv modules installation (Unix based systems)
  virtualenv env
  source env/bin/activate
 
- # Virtualenv modules installation (Windows based systems)
+## Virtualenv modules installation (Windows based systems)
   virtualenv env
   .\env\Scripts\activate
 
- # Install modules - SQLite Database
+## Install modules - SQLite Database
  pip3 install -r requirements.txt
 
- # OR with PostgreSQL connector
+## OR with PostgreSQL connector
  pip install -r requirements-pgsql.txt
 
- # Set the FLASK_APP environment variable
+## Set the FLASK_APP environment variable
  (Unix/Mac) export FLASK_APP=run.py
  (Windows) set FLASK_APP=run.py
  (Powershell) env:FLASK_APP = ".\run.py"
 
- # Set up the DEBUG environment
+## Set up the DEBUG environment
  (Unix/Mac) export FLASK_ENV=development
 (Windows) set FLASK_ENV=development
  (Powershell) env:FLASK_ENV = "development"
 
- # Start the application (development mode)
+## Start the application (development mode)
   --host=0.0.0.0 - expose the app on all network interfaces (default 127.0.0.1)
   --port=5000    - specify the app port (default 5000)  
  flask run --host=0.0.0.0 --port=5000
-
- # Access the dashboard in browser: http://127.0.0.1:5000/
  
+ Access the dashboard in browser: http://127.0.0.1:5000/
  
- # HackWestern7 Hackathon Project - CanWeTalk Mental Health Platform
 
-## How to run this project
-
-# Get the code
-git clone https://github.com/app-generator/flask-dashboard-dattaable.git
-cd flask-dashboard-dattaable
-
-# Virtualenv modules installation (Unix based systems)
-virtualenv env
-source env/bin/activate
-
-# Virtualenv modules installation (Windows based systems)
-# virtualenv env
-# .\env\Scripts\activate
-
-# Install modules - SQLite Database
-pip3 install -r requirements.txt
-
-# OR with PostgreSQL connector
-# pip install -r requirements-pgsql.txt
-
-# Set the FLASK_APP environment variable
-(Unix/Mac) export FLASK_APP=run.py
-(Windows) set FLASK_APP=run.py
-(Powershell) $env:FLASK_APP = ".\run.py"
-
-# Set up the DEBUG environment
-# (Unix/Mac) export FLASK_ENV=development
-# (Windows) set FLASK_ENV=development
-# (Powershell) $env:FLASK_ENV = "development"
-
-# Start the application (development mode)
-# --host=0.0.0.0 - expose the app on all network interfaces (default 127.0.0.1)
-# --port=5000    - specify the app port (default 5000)  
-flask run --host=0.0.0.0 --port=5000
-# Access the dashboard in browser: http://127.0.0.1:5000/
-
-
-## Inspiration
-University students during the COVID-19 pandemic have experienced some of the worst mental-health concerns in the population, as we’re separated from our friends, family and forced to study online during lockdown. We wanted to create the best platform for students to easily connect with mental-health help from university therapists or counselors. 
 
 ## What it does
 CanWeTalk is a platform that allows students to instantly text-message a university counsellor via a university-wide number, with no app downloads required. It’s designed to be as effortless as possible to connect with a school counselor. The moment their message is sent, it is received by the counsellors who can reply instantly, making campus mental health services more convenient for all students.
